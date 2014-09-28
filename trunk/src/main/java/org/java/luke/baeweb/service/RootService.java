@@ -11,6 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.java.luke.baeweb.action.FirstAction;
+
 import com.alibaba.fastjson.JSONObject;
 
 @Path("/")
@@ -21,11 +23,11 @@ public class RootService {
   @Context
   private HttpServletRequest servletRequest;
 
-  @Path("/{actionName}")
+  @Path("/first/{method}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response hlpsetJsonResponse(JSONObject json, @PathParam("actionName") String actionName) throws Exception {
-    return null;// commonUse(servletRequest, rmm, HlpsetAction.class, actionName, _moduleName);
+  public Response hlpsetJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
+    return new FirstAction(servletContext, servletRequest, para).process(method);
   }
 }
