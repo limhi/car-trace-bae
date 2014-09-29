@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Console output -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="debug" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- log要顯示的格式，具體參數請參考 http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html -->
+			<!-- <param name="ConversionPattern" value="LUKE STD %-5p %c.%M:%L - %m%n" 
+				/> -->
+			<!-- <param name="ConversionPattern" value="LUKE STD %-5p %F:%L - %m%n" 
+				/> -->
+			<param name="ConversionPattern" value="LUKE STD %-5p %r %c{2}.%M:%L - %m%n" />
+		</layout>
+	</appender>
+
+
+	<logger name="org.java" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root>
+		<level value="warn" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</log4j:configuration>
