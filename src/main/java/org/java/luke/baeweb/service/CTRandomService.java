@@ -11,24 +11,23 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.java.luke.baeweb.action.FirstAction;
+import org.java.luke.baeweb.action.ctrandom.CarPhoneRandomAction;
 
 import com.alibaba.fastjson.JSONObject;
 
-@Path("/")
-public class RootService {
+@Path("/ctrandom")
+public class CTRandomService {
   @Context
   private ServletContext servletContext;
 
   @Context
   private HttpServletRequest servletRequest;
 
-  @Path("/first/{method}")
+  @Path("/cprandom/{method}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response firstJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
-    System.out.println("RootService firstJsonResponse");
-    return new FirstAction(servletContext, servletRequest, para).process(method);
+  public Response cprandomJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
+    return new CarPhoneRandomAction(servletContext, servletRequest, para).process(method);
   }
 }

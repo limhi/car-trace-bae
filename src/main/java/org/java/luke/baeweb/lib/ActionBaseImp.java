@@ -34,6 +34,12 @@ public class ActionBaseImp implements ActionBaseIF {
       return insert();
     } else if ("update".equals(method)) {
       return update();
+    } else if ("merge".equals(method)) {
+      return merge();
+    } else if ("match".equals(method)) {
+      return match();
+    } else if ("send".equals(method)) {
+      return send();
     } else if ("delete".equals(method)) {
       return delete();
     } else {
@@ -51,6 +57,18 @@ public class ActionBaseImp implements ActionBaseIF {
 
   protected Response update() throws Exception {
     throw new Exception(className + " update() not implements");
+  }
+
+  protected Response merge() throws Exception {
+    throw new Exception(className + " merge() not implements");
+  }
+
+  protected Response match() throws Exception {
+    throw new Exception(className + " match() not implements");
+  }
+
+  protected Response send() throws Exception {
+    throw new Exception(className + " send() not implements");
   }
 
   protected Response delete() throws Exception {
