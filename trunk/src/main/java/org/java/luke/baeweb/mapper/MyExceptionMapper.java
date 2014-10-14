@@ -7,19 +7,24 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import com.alibaba.fastjson.JSONObject;
+
 @Provider
 public class MyExceptionMapper implements ExceptionMapper<Exception> {
 
   public Response toResponse(Exception ex) {
     ResponseBuilder builder = null;
     try {
-      builder = Response.status(HttpServletResponse.SC_OK);
+      builder = Response.status(HttpServletResponse.SC_BAD_REQUEST);
       builder.header("Content-Type", MediaType.APPLICATION_JSON + ";charset=utf-8");
-      StringBuffer sb = new StringBuffer();
-      sb.append(ex.getClass().getName() + "<BR>");
-      sb.append(ex.getMessage());
-      builder.entity(sb.toString());
-      // builder.code("0x" + Integer.toHexString(ex.getErrorCode()));
+      JSONObject json = new JSONObject();
+      json.put("classname", ex.getClass().getName());
+      json.put("message", ex.getMessage());
+      // StringBuffer sb = new StringBuffer();
+      // sb.append(ex.getClass().getName() + "<BR>");
+      // sb.append(ex.getMessage());
+      // builder.entity(sb.toString());
+      builder.entity(json.toJSONString());
 
       ex.printStackTrace();
 
