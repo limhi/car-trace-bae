@@ -19,7 +19,7 @@ public class CarPhonePushNotificationAction extends ActionBaseImp {
     JSONObject para = (JSONObject) _para.clone();
 
     JSONObject json = new JSONObject();
-    return packResponse(json);
+    return packResponseWithJson(json);
   }
 
   @Override
@@ -27,7 +27,7 @@ public class CarPhonePushNotificationAction extends ActionBaseImp {
     JSONObject para = (JSONObject) _para.clone();
 
     JSONObject json = new JSONObject();
-    return packResponse(json);
+    return packResponseWithJson(json);
   }
 
 }

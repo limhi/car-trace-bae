@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 public class ActionBaseImp implements ActionBaseIF {
@@ -75,7 +76,16 @@ public class ActionBaseImp implements ActionBaseIF {
     throw new Exception(className + " delete() not implements");
   }
 
-  protected Response packResponse(JSONObject json) {
+  protected Response packResponseWithObj(Object obj) {
+    JSONObject json = null;
+    if (null == obj)
+      json = new JSONObject();
+    else
+      json = JSON.parseObject(myJSON.toJSONString(obj));
+    return packResponseWithJson(json);
+  }
+
+  protected Response packResponseWithJson(JSONObject json) {
     ResponseBuilder builder = Response.status(HttpServletResponse.SC_OK);
     builder.header("Content-Type", MediaType.APPLICATION_JSON + ";charset=utf-8");
     if (null == json)
@@ -83,4 +93,5 @@ public class ActionBaseImp implements ActionBaseIF {
     builder.entity(myJSON.toJSONString(json));
     return builder.build();
   }
+
 }
