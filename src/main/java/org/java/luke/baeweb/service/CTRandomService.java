@@ -11,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.java.luke.baeweb.action.ctrandom.CarPhoneRandomAction;
 
 import com.alibaba.fastjson.JSONObject;
@@ -22,12 +23,14 @@ public class CTRandomService {
 
   @Context
   private HttpServletRequest servletRequest;
+  private static final Logger logger = Logger.getLogger(CTRandomService.class);
 
   @Path("/cprandom/{method}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response cprandomJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
+    logger.info("in CTRandomService, cprandomJsonResponse, para = " + para + ", method = " + method);
     return new CarPhoneRandomAction(servletContext, servletRequest, para).process(method);
   }
 }

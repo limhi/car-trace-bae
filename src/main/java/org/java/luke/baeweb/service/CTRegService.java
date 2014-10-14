@@ -11,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.java.luke.baeweb.action.ctreg.CarRegAction;
 import org.java.luke.baeweb.action.ctreg.PhoneRegAction;
 
@@ -23,12 +24,14 @@ public class CTRegService {
 
   @Context
   private HttpServletRequest servletRequest;
+  private static final Logger logger = Logger.getLogger(CTRegService.class);
 
   @Path("/creg/{method}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response carregJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
+    logger.info("in CTRegService, carregJsonResponse, para = " + para + ", method = " + method);
     return new CarRegAction(servletContext, servletRequest, para).process(method);
   }
 
@@ -37,6 +40,7 @@ public class CTRegService {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response phoneregJsonResponse(JSONObject para, @PathParam("method") String method) throws Exception {
+    logger.info("in CTRegService, phoneregJsonResponse, para = " + para + ", method = " + method);
     return new PhoneRegAction(servletContext, servletRequest, para).process(method);
   }
 }
