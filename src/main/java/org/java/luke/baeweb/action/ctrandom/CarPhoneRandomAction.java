@@ -191,6 +191,7 @@ public class CarPhoneRandomAction extends ActionBaseImp {
           rel_bean.setCarID(carid);
           rel_bean.setPhoneID(phoneid);
           rel_bean.setIsPrimary(ran_bean.getIsPrimary());
+          rel_bean.setAddTime(dateStr);
           rel_bean.setModTime(dateStr);
           rel_service.insert(rel_bean);
         }
